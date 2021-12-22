@@ -1,0 +1,75 @@
+@use 'src/theme' as theme;
+
+.mainContainer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-primary);
+}
+
+.centerContainer {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    margin-bottom: map-get(theme.$margins, large);
+  }
+}
+
+.box {
+  z-index: 1;
+  * {
+    margin-bottom: map-get(theme.$margins, small);
+  }
+}
+
+.logo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  height: 100px;
+}
+
+.squareDiv {
+  position: fixed;
+  background-color: theme.$black;
+  transform: rotate(45deg);
+  opacity: 0.1;
+  top: -15vmin;
+  left: -15vmin;
+  min-width: 75vmin;
+  min-height: 75vmin;
+}
+
+.circleDiv {
+  position: fixed;
+  border-radius: 50%;
+  background-color: theme.$black;
+  opacity: 0.1;
+  min-width: 75vmin;
+  min-height: 75vmin;
+  bottom: -15vmin;
+  right: -15vmin;
+}
+
+.bottomContainer {
+  color: theme.$white;
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: map-get(theme.$margins, large);
+}
+
+.createLink {
+  color: theme.$white;
+  margin-left: map-get(theme.$margins, x-small);
+  font-weight: 700;
+  cursor: pointer;
+}

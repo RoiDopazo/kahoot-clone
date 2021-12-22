@@ -1,0 +1,32 @@
+@use 'src/theme' as theme;
+
+.button {
+  width: 100%;
+  margin: 0px;
+  border: 0px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: bottom;
+  box-shadow: rgb(0 0 0 / 25%) 0px -4px inset;
+  background: theme.$darkGray;
+  color: theme.$white;
+  border-radius: 4px;
+  font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0px 16px 4px;
+  position: relative;
+  line-height: 0.875rem;
+
+  &:hover {
+    min-height: 46px;
+    margin-top: 2px;
+    padding-bottom: 2px;
+    filter: brightness(90%);
+    box-shadow: rgb(0 0 0 / 25%) 0px -2px inset;
+  }
+}
