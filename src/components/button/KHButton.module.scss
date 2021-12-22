@@ -1,4 +1,4 @@
-@use 'src/theme' as theme;
+@use 'src/theme.module' as theme;
 
 .button {
   width: 100%;
@@ -23,10 +23,13 @@
   line-height: 0.875rem;
 
   &:hover {
-    min-height: 46px;
     margin-top: 2px;
     padding-bottom: 2px;
     filter: brightness(90%);
     box-shadow: rgb(0 0 0 / 25%) 0px -2px inset;
   }
+}
+
+.buttonSmall {
+  min-height: 36px;
 }

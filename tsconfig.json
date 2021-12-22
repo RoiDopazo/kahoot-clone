@@ -23,7 +23,7 @@
       "@/router/*": ["./router/*"],
       "@/pages/*": ["./pages/*"],
       "@/assets/*": ["./assets/*"],
-      "@/theme": ["./theme.scss"]
+      "@/theme": ["./theme.module.scss"]
     }
   },
   "include": ["./src"]

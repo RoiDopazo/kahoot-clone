@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=kahootdb
+      - MONGO_INITDB_ROOT_USERNAME=kahootuser
+      - MONGO_INITDB_ROOT_PASSWORD=kahootpassword
+    volumes:
+      - ./mongo-volume:/data/db
+    ports:
+      - 27017:27017

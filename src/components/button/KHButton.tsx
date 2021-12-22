@@ -1,9 +1,30 @@
 import React from 'react';
-import './KHButton.scss';
+import styles from './KHButton.module.scss';
+import cx from 'classnames';
+import theme from '@/theme.module.scss';
 
-const KHButton = ({ children, onClick }) => {
+type variantType = 'default' | 'black' | 'success';
+
+interface IKHButton {
+  variant?: variantType;
+  onClick?: () => void;
+  small?: boolean;
+  children: React.ReactNode;
+}
+
+const variantColorMapper: Record<variantType, any> = {
+  default: theme.buttonDefault,
+  black: theme.black,
+  success: theme.success
+};
+
+const KHButton = ({ variant = 'default', small, children, onClick }: IKHButton) => {
   return (
-    <button onClick={onClick} className="button">
+    <button
+      onClick={onClick}
+      className={cx(styles.button, { [styles.buttonSmall]: small })}
+      style={{ background: variantColorMapper[variant] }}
+    >
       {children}
     </button>
   );

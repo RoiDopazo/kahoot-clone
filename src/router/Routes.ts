@@ -1,5 +1,6 @@
 enum Routes {
   Main = '/',
+  LibraryPage = '/library',
   CreateKahoot = '/create'
 }
 

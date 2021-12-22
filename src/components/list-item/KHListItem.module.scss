@@ -1,0 +1,41 @@
+@use 'src/theme.module' as theme;
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  margin-top: map-get(theme.$margins, large) * 2;
+  margin-left: map-get(theme.$margins, large) * 4;
+  margin-right: map-get(theme.$margins, large) * 4;
+}
+
+.innerContainer {
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px 0px;
+  box-sizing: border-box;
+  padding: 2rem 1.5rem;
+  margin-top: 1rem;
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.infoContainer {
+  font-weight: bold;
+}
+
+.actionsContainer {
+  display: flex;
+  flex-direction: row;
+
+  button:not(:last-child) {
+    height: 36px;
+    margin-right: 10px;
+  }
+}
