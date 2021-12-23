@@ -71,7 +71,7 @@ const LandingPage = () => {
             />
           )}
           <KHButton variant="black" onClick={onPressButton}>
-            {step === STEPS.NAME ? formatMessage('¡Listo, vamos!') : formatMessage('PIN del juego')}
+            {step === STEPS.NAME ? formatMessage('¡Listo, vamos!') : formatMessage('Ingresar')}
           </KHButton>
         </KHBox>
       </div>
