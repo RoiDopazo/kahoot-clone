@@ -10,6 +10,9 @@
     "server-client": "yarn run server-build && node server/dist/client-cli.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.5",
     "classnames": "^2.3.1",
     "express": "^4.17.2",
     "immer": "^9.0.7",

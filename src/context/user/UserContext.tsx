@@ -1,6 +1,6 @@
 import produce from 'immer';
 import React, { createContext, useReducer } from 'react';
-import { KH_USERNAME } from '@/env';
+import { KH_USERNAME } from '@/environment';
 
 interface IUserState {
   isAdmin: boolean;

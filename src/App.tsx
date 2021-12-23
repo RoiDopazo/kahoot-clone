@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './app.scss';
 import Router from '@/router/Router';
-import { AppProvider } from '@/context/AppProvider';
+import { AppGlobalProvider } from '@/context/AppGlobalProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppProvider>
+    <AppGlobalProvider>
       <Router />
-    </AppProvider>
+    </AppGlobalProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

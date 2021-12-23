@@ -8,6 +8,8 @@ $mediumGray: var(--color-mediumGray);
 $lightGray: var(--color-lightGray);
 $button-default: var(--color-buttonDefault);
 $success: var(--color-success);
+$warning: var(--color-warning);
+$error: var(--color-error);
 
 $margins: (
   large: 20px,
@@ -26,4 +28,6 @@ $margins: (
   lightGray: $lightGray;
   buttonDefault: $button-default;
   success: $success;
+  warning: $warning;
+  error: $error;
 }

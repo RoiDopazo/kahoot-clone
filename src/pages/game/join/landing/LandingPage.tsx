@@ -11,6 +11,7 @@ import KHLoading from '@/components/loading/KHLoading';
 import theme from '@/theme.module.scss';
 import { GameContext } from '@/context/game/GameContext';
 import { UserContext } from '@/context/user/UserContext';
+import KHSetupMenu from '@/components/menu/KHSetupMenu';
 
 enum STEPS {
   CODE = 'code',
@@ -49,6 +50,7 @@ const LandingPage = () => {
 
   return (
     <div className={styles.mainContainer}>
+      <KHSetupMenu className={styles.topRightMenu} />
       {step === STEPS.LOADING && <KHLoading isFullScreen />}
       <div className={styles.squareDiv} />
       <div className={styles.circleDiv} />

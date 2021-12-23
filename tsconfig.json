@@ -23,9 +23,10 @@
       "@/router/*": ["./router/*"],
       "@/pages/*": ["./pages/*"],
       "@/context/*": ["./context/*"],
+      "@/services/*": ["./services/*"],
       "@/assets/*": ["./assets/*"],
       "@/theme": ["./theme.module.scss"],
-      "@/env": ["./environment.ts"]
+      "@/environment": ["./environment.ts"]
     }
   },
   "include": ["./src"]
