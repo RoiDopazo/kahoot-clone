@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styles from './JoinGamePage.module.scss';
+import styles from './LandingPage.module.scss';
 import { ReactComponent as KHLogo } from '@/assets/logos/kahoot-logo.svg';
 import KHBox from '@/components/box/KHBox';
 import formatMessage from 'format-message';
 import KHTextInput from '@/components/input/KHTextInput';
 import KHButton from '@/components/button/KHButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Routes from '@/router/Routes';
 import KHLoading from '@/components/loading/KHLoading';
 import theme from '@/theme.module.scss';
@@ -16,8 +16,9 @@ enum STEPS {
   NAME = 'name'
 }
 
-const JoinGamePage = () => {
+const LandingPage = () => {
   const [step, setStep] = useState<STEPS>(STEPS.CODE);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (step === STEPS.LOADING) {
@@ -29,7 +30,10 @@ const JoinGamePage = () => {
 
   const onPressButton = () => {
     if (step === STEPS.CODE) {
-      setStep(STEPS.LOADING);
+      return setStep(STEPS.LOADING);
+    }
+    if (step === STEPS.NAME) {
+      navigate(Routes.Instructions);
     }
   };
 
@@ -61,4 +65,4 @@ const JoinGamePage = () => {
   );
 };
 
-export default JoinGamePage;
+export default LandingPage;

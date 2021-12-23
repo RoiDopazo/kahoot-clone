@@ -22,6 +22,7 @@
       "@/components/*": ["./components/*"],
       "@/router/*": ["./router/*"],
       "@/pages/*": ["./pages/*"],
+      "@/context/*": ["./context/*"],
       "@/assets/*": ["./assets/*"],
       "@/theme": ["./theme.module.scss"]
     }

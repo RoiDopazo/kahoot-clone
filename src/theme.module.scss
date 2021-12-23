@@ -1,6 +1,7 @@
 // Color palette
 $primaryColor: var(--color-primary);
 $white: var(--color-white);
+$white-bg: var(--color-white-bg);
 $black: var(--color-black);
 $darkGray: var(--color-darkGray);
 $mediumGray: var(--color-mediumGray);
@@ -18,6 +19,7 @@ $margins: (
 :export {
   primaryColor: $primaryColor;
   white: $white;
+  whiteBg: $white-bg;
   black: $black;
   darkGray: $darkGray;
   mediumGray: $mediumGray;

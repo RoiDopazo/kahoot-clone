@@ -1,0 +1,134 @@
+@use 'src/theme.module' as theme;
+
+.container {
+  height: 100vh;
+  background: url('../../../../assets/bg/christmas.jpg') center center / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.topContainer {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.topInnerContainer {
+  margin-top: map-get(theme.$margins, large);
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+}
+
+.topJoinInfoContainer {
+  height: 100%;
+  display: flex;
+  filter: drop-shadow(rgba(theme.$black, 0.15) 0px 2px 4px);
+  background-color: theme.$white;
+  padding: 1.7vmin 2.5vmin 1.7vmin 2.8vmin;
+  border-radius: 0.5vmin 0px 0px 0.5vmin;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-right: -1vmin;
+  clip-path: polygon(calc(100% - 2.5vmin) 0px, 100% 50%, calc(100% - 2.5vmin) 100%, 0px 100%, 0px 0px);
+  font-size: 1.8rem;
+  color: theme.$darkGray;
+  font-weight: 400;
+  max-width: 300px;
+}
+
+.topPinContainer {
+  height: 100%;
+  font-weight: 900;
+  line-height: normal;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: theme.$white;
+  border-radius: 0px 0.5vmin 0.5vmin 0px;
+  padding: 1.7vmin 4.5vmin 1.7vmin 4.5vmin;
+  margin-left: -1vmin;
+  clip-path: polygon(0px 0%, 100% 0px, 100% 100%, 0px 100%, 2.5vmin 50%);
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px 0px;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.pinInfoText {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: theme.$darkGray;
+  align-self: baseline;
+}
+
+.pinValueText {
+  font-size: 4.8rem;
+  color: theme.$darkGray;
+  font-weight: 900;
+  align-self: baseline;
+}
+
+.middleContainer {
+  height: 150px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 map-get(theme.$margins, large) * 3;
+  align-items: center;
+}
+
+.lightBox {
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  background: theme.$white-bg;
+  color: theme.$darkGray;
+  border-radius: 4px;
+  padding: 8px 16px 8px 8px;
+  margin: 0px 8px 8px 0px;
+  height: calc(2.5rem + 8px);
+  box-sizing: border-box;
+}
+
+.profileIcon {
+  width: 40px;
+  height: auto;
+}
+
+.playersCountText {
+  color: theme.$darkGray;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.logo {
+  height: auto;
+  width: 200px;
+}
+
+.bottomContainer {
+  overflow-y: scroll;
+  display: flex;
+  flex: 1;
+  margin: 20px 80px 20px 80px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+
+  > div {
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 30px;
+    margin: 10px 60px;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
