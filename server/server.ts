@@ -13,14 +13,18 @@ const io = new Server(
 io.on('connection', (socket) => {
   // Host Connection
   socket.on('create-new-game', ({ code }) => {
-    console.log('code: ', code);
     socket.join(code);
   });
   //Player Join Room
   socket.on('player-joins', async ({ code, player }) => {
-    console.log('code: ', code);
     await socket.join(code);
     socket.to(code).emit('player-joined', { player });
+  });
+  socket.on('kick-player', ({ code, player }) => {
+    socket.to(code).emit('player-kicked', { player });
+  });
+  socket.on('player-leaves', ({ code }) => {
+    socket.leave(code);
   });
   //Add player to Quiz Object
   // socket.on('player-add', (data) => {

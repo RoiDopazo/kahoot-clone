@@ -5,12 +5,12 @@ import theme from '@/theme.module.scss';
 import styles from './LibraryPage.module.scss';
 import KHListItem from '@/components/list-item/KHListItem';
 import { useNavigate } from 'react-router-dom';
-import { GameContext } from '@/context/game/GameContext';
+import { GameHostContext } from '@/context/game/GameHostContext';
 import Routes from '@/router/Routes';
 
 const LibraryPage = () => {
   const navigate = useNavigate();
-  const { mutations: gameMutations } = useContext(GameContext);
+  const { mutations: gameMutations } = useContext(GameHostContext);
 
   const items = [
     {

@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Routes from '@/router/Routes';
 import KHLoading from '@/components/loading/KHLoading';
 import theme from '@/theme.module.scss';
-import { GameContext } from '@/context/game/GameContext';
+import { GamePlayerContext } from '@/context/game/GamePlayerContext';
 import { UserContext } from '@/context/user/UserContext';
 import KHSetupMenu from '@/components/menu/KHSetupMenu';
 
@@ -25,7 +25,7 @@ const LandingPage = () => {
   const [name, setName] = useState('');
 
   const { mutations: userMutations } = useContext(UserContext);
-  const { mutations: gameMutations } = useContext(GameContext);
+  const { mutations: gameMutations } = useContext(GamePlayerContext);
 
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ const LandingPage = () => {
     }
     if (step === STEPS.NAME) {
       userMutations.setUser({ username: name });
-      gameMutations.joinNewGame({ code: parseInt(code, 10), player: name });
+      gameMutations.joinGame({ code: parseInt(code, 10), player: name });
       navigate(Routes.Instructions);
     }
   };

@@ -6,9 +6,9 @@ import { AppGlobalProvider } from '@/context/AppGlobalProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppGlobalProvider>
-      <Router />
-    </AppGlobalProvider>
+    {/* <AppGlobalProvider> */}
+    <Router />
+    {/* </AppGlobalProvider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,17 +1,15 @@
 import produce from 'immer';
 import React, { createContext, useContext, useReducer } from 'react';
 import { UserContext } from '@/context/user/UserContext';
-import KHSocketClient from '../../services/socket-client/KHSocketClient';
+import KHSocketClient from '@/services/socket-client/KHSocketClient';
 
-// It doesnt support more than 1 game per session.
-// Further work would be add this functionality here.
-interface IGameState {
+interface IGameHostState {
   code?: number;
   host?: string;
   players: string[];
 }
 
-const gameInitialState: IGameState = {
+const gameHostInitialState: IGameHostState = {
   code: undefined,
   host: undefined,
   players: []
@@ -20,7 +18,7 @@ const gameInitialState: IGameState = {
 enum ActionKind {
   HOST_NEW_GAME = 'HOST_NEW_GAME',
   ON_PLAYER_ADDED = 'ON_PLAYER_ADDED',
-  JOIN_GAME = 'JOIN_GAME'
+  REMOVE_PLAYER = 'REMOVE_PLAYER'
 }
 
 type Action = {
@@ -28,18 +26,18 @@ type Action = {
   payload: any;
 };
 
-export interface IGameContext {
-  state: IGameState;
+export interface IGameHostContext {
+  state: IGameHostState;
   mutations: {
     hostNewGame: () => void;
-    joinNewGame: ({ code, player }: { code?: number; player: string }) => void;
     onPlayerJoined: () => void;
+    kickPlayer: ({ player }: { player: string }) => void;
   };
 }
 
-const GameContext = createContext<IGameContext>({ state: gameInitialState, mutations: {} as any });
+const GameHostContext = createContext<IGameHostContext>({ state: gameHostInitialState, mutations: {} as any });
 
-const userReducer = (state: IGameState, action: Action): IGameState => {
+const userReducer = (state: IGameHostState, action: Action): IGameHostState => {
   switch (action.type) {
     case ActionKind.HOST_NEW_GAME: {
       const randomCode = Math.floor(100000 + Math.random() * 900000);
@@ -58,16 +56,10 @@ const userReducer = (state: IGameState, action: Action): IGameState => {
       });
     }
 
-    case ActionKind.JOIN_GAME: {
-      if (!action.payload.code || action.payload.code !== state.code) {
-        //TODO: Improve error handling
-        console.log('La partida no existe');
-        throw new Error();
-      }
-
-      KHSocketClient.joinGame({ code: action.payload.code, player: action.payload.player });
-
-      return state;
+    case ActionKind.REMOVE_PLAYER: {
+      return produce(state, (draft) => {
+        draft.players = draft.players.filter((player) => player !== action.payload.player);
+      });
     }
 
     default:
@@ -75,8 +67,8 @@ const userReducer = (state: IGameState, action: Action): IGameState => {
   }
 };
 
-const GameProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(userReducer, gameInitialState);
+const GameHostProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(userReducer, gameHostInitialState);
   const { state: userState } = useContext(UserContext);
 
   const onPlayerAdded = ({ player }) => {
@@ -91,17 +83,18 @@ const GameProvider = ({ children }) => {
     dispatch({ type: ActionKind.HOST_NEW_GAME, payload: { host: userState.user } });
   };
 
-  const joinNewGame = ({ code, player }: { code?: number; player: string }) => {
-    KHSocketClient.joinGame({ code: code, player });
+  const kickPlayer = ({ player }) => {
+    KHSocketClient.kickPlayer({ code: state.code, player });
+    dispatch({ type: ActionKind.REMOVE_PLAYER, payload: { player } });
   };
 
   const mutations = {
     hostNewGame,
-    joinNewGame,
-    onPlayerJoined
+    onPlayerJoined,
+    kickPlayer
   };
 
-  return <GameContext.Provider value={{ state, mutations }}>{children}</GameContext.Provider>;
+  return <GameHostContext.Provider value={{ state, mutations }}>{children}</GameHostContext.Provider>;
 };
 
-export { GameContext, GameProvider };
+export { GameHostContext, GameHostProvider };

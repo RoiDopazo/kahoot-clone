@@ -1,6 +1,7 @@
 import React, { ComponentProps, FC } from 'react';
 import { AppProvider } from './app/AppContext';
-import { GameProvider } from './game/GameContext';
+import { GameHostProvider } from './game/GameHostContext';
+import { GamePlayerProvider } from './game/GamePlayerContext';
 import { UserProvider } from './user/UserContext';
 
 export const combineComponents = (...components: FC[]): any => {
@@ -18,6 +19,6 @@ export const combineComponents = (...components: FC[]): any => {
   );
 };
 
-const providers: any = [UserProvider, GameProvider, AppProvider];
+const providers: any = [UserProvider, GameHostProvider, GamePlayerProvider, AppProvider];
 
 export const AppGlobalProvider = combineComponents(...providers);

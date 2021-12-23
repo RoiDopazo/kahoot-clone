@@ -17,6 +17,9 @@ const KHSocketClient = {
     socket.disconnect();
     socket = Server(socketUrl as string, { transports: ['websocket'] });
   },
+  leave: ({ code }) => {
+    socket.emit('player-leaves', { code });
+  },
   createNewGame: ({ code }) => {
     socket.emit('create-new-game', { code });
   },
@@ -25,6 +28,12 @@ const KHSocketClient = {
   },
   onPlayerJoin: (callback) => {
     socket.on('player-joined', callback);
+  },
+  kickPlayer: ({ code, player }) => {
+    socket.emit('kick-player', { code, player });
+  },
+  onPlayerKicked: ({ callback }) => {
+    socket.on('player-kicked', callback);
   }
 };
 

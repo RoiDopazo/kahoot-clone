@@ -5,14 +5,18 @@ import { ReactComponent as KHLogo } from '@/assets/logos/kahoot-logo.svg';
 import { ReactComponent as ProfileIcon } from '@/assets/svg/profile-icon.svg';
 import KHButton from '@/components/button/KHButton';
 import theme from '@/theme.module.scss';
-import { GameContext } from '@/context/game/GameContext';
+import { GameHostContext } from '@/context/game/GameHostContext';
 
 const LobbyPage = () => {
-  const { state: gameState, mutations: gameMutations } = useContext(GameContext);
+  const { state: gameState, mutations: gameMutations } = useContext(GameHostContext);
 
   useEffect(() => {
     gameMutations.onPlayerJoined();
   }, []);
+
+  const handleKickPlayer = ({ player }) => {
+    gameMutations.kickPlayer({ player });
+  };
 
   return (
     <div className={styles.container}>
@@ -42,7 +46,11 @@ const LobbyPage = () => {
 
       <div className={styles.bottomContainer}>
         {gameState.players.map((player) => {
-          return <div className={styles.lightBox}>{player}</div>;
+          return (
+            <div onClick={() => handleKickPlayer({ player })} className={styles.lightBox}>
+              {player}
+            </div>
+          );
         })}
       </div>
     </div>
