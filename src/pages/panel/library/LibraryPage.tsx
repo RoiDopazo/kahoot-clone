@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ReactComponent as KHLogo } from '@/assets/logos/kahoot-logo.svg';
 import cx from 'classnames';
 import theme from '@/theme.module.scss';
 import styles from './LibraryPage.module.scss';
 import KHListItem from '@/components/list-item/KHListItem';
+import { useNavigate } from 'react-router-dom';
+import { GameContext } from '@/context/game/GameContext';
+import Routes from '@/router/Routes';
 
 const LibraryPage = () => {
+  const navigate = useNavigate();
+  const { mutations: gameMutations } = useContext(GameContext);
+
   const items = [
     {
       _id: { $oid: '61c38f555131ea4c20bb5746' },
@@ -40,6 +46,11 @@ const LibraryPage = () => {
     }
   ];
 
+  const handlePlayKahoot = () => {
+    gameMutations.hostNewGame();
+    navigate(Routes.Lobby);
+  };
+
   return (
     <>
       <nav className={styles.navBar}>
@@ -48,7 +59,7 @@ const LibraryPage = () => {
       </nav>
       <div>
         {items.map((kahoot) => {
-          return <KHListItem kahoot={kahoot} />;
+          return <KHListItem kahoot={kahoot} onPlay={handlePlayKahoot} />;
         })}
       </div>
     </>

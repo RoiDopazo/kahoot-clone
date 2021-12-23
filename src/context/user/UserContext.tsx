@@ -23,7 +23,7 @@ type Action = {
 export interface IUserContext {
   state: IUserState;
   mutations: {
-    onChangeUsername: () => void;
+    setUser: ({ username }: { username: string }) => void;
   };
 }
 
@@ -44,7 +44,13 @@ const userReducer = (state: IUserState, action: Action): IUserState => {
 const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, userInitialState);
 
-  const mutations = {} as any;
+  const setUser = ({ username }) => {
+    dispatch({ type: ActionKind.CHANGE_USERNAME, payload: { user: username } });
+  };
+
+  const mutations = {
+    setUser
+  };
 
   return <UserContext.Provider value={{ state, mutations }}>{children}</UserContext.Provider>;
 };

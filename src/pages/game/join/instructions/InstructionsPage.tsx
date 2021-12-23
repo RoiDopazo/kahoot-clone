@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './InstructionsPage.module.scss';
 import formatMessage from 'format-message';
+import { UserContext } from '@/context/user/UserContext';
 
 const InstructionsPage = () => {
+  const { state: userState } = useContext(UserContext);
+
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
@@ -14,7 +17,7 @@ const InstructionsPage = () => {
         </div>
         <div className={styles.topInnerContainer}></div>
       </div>
-      <div className={styles.bottomContainer}>test</div>
+      <div className={styles.bottomContainer}>{userState.user}</div>
     </div>
   );
 };

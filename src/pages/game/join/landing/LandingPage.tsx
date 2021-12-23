@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from './LandingPage.module.scss';
 import { ReactComponent as KHLogo } from '@/assets/logos/kahoot-logo.svg';
 import KHBox from '@/components/box/KHBox';
@@ -9,6 +9,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Routes from '@/router/Routes';
 import KHLoading from '@/components/loading/KHLoading';
 import theme from '@/theme.module.scss';
+import { GameContext } from '@/context/game/GameContext';
+import { UserContext } from '@/context/user/UserContext';
 
 enum STEPS {
   CODE = 'code',
@@ -18,13 +20,19 @@ enum STEPS {
 
 const LandingPage = () => {
   const [step, setStep] = useState<STEPS>(STEPS.CODE);
+  const [code, setCode] = useState('');
+  const [name, setName] = useState('');
+
+  const { mutations: userMutations } = useContext(UserContext);
+  const { mutations: gameMutations } = useContext(GameContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     if (step === STEPS.LOADING) {
       setTimeout(() => {
         setStep(STEPS.NAME);
-      }, 4000);
+      }, 2000);
     }
   }, [step]);
 
@@ -33,6 +41,8 @@ const LandingPage = () => {
       return setStep(STEPS.LOADING);
     }
     if (step === STEPS.NAME) {
+      userMutations.setUser({ username: name });
+      gameMutations.joinNewGame({ code: parseInt(code, 10), player: name });
       navigate(Routes.Instructions);
     }
   };
@@ -45,9 +55,19 @@ const LandingPage = () => {
       <div className={styles.centerContainer}>
         <KHLogo fill={theme.white} className={styles.logo} />
         <KHBox className={styles.box}>
-          <KHTextInput
-            placeholder={step === STEPS.NAME ? formatMessage('Nombre de usuario') : formatMessage('PIN del juego')}
-          />
+          {step === STEPS.NAME ? (
+            <KHTextInput
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder={formatMessage('Nombre de usuario')}
+            />
+          ) : (
+            <KHTextInput
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder={formatMessage('PIN del juego')}
+            />
+          )}
           <KHButton variant="black" onClick={onPressButton}>
             {step === STEPS.NAME ? formatMessage('¡Listo, vamos!') : formatMessage('PIN del juego')}
           </KHButton>

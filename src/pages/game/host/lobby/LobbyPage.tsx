@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styles from './LobbyPage.module.scss';
 import formatMessage from 'format-message';
 import { ReactComponent as KHLogo } from '@/assets/logos/kahoot-logo.svg';
 import { ReactComponent as ProfileIcon } from '@/assets/svg/profile-icon.svg';
 import KHButton from '@/components/button/KHButton';
 import theme from '@/theme.module.scss';
+import { GameContext } from '@/context/game/GameContext';
 
 const LobbyPage = () => {
-  const listPlayers = ['test', 'marc', 'louis'];
+  const { state: gameState, mutations: gameMutations } = useContext(GameContext);
+
+  useEffect(() => {
+    gameMutations.onPlayerJoined();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -17,7 +22,7 @@ const LobbyPage = () => {
 
           <div className={styles.topPinContainer}>
             <div className={styles.pinInfoText}>{formatMessage('PIN de juego:')} </div>
-            <div className={styles.pinValueText}>{formatMessage('562 4545')} </div>
+            <div className={styles.pinValueText}>{gameState.code} </div>
           </div>
         </div>
       </div>
@@ -25,7 +30,7 @@ const LobbyPage = () => {
       <div className={styles.middleContainer}>
         <div className={styles.lightBox}>
           <ProfileIcon className={styles.profileIcon} fill={theme.darkGray} />
-          <div className={styles.playersCountText}>{listPlayers.length}</div>
+          <div className={styles.playersCountText}>{gameState.players.length}</div>
         </div>
 
         <KHLogo className={styles.logo} fill={theme.primaryColor} />
@@ -36,7 +41,7 @@ const LobbyPage = () => {
       </div>
 
       <div className={styles.bottomContainer}>
-        {listPlayers.map((player) => {
+        {gameState.players.map((player) => {
           return <div className={styles.lightBox}>{player}</div>;
         })}
       </div>
