@@ -1,6 +1,7 @@
 import Server from 'socket.io-client';
+import { KH_SOCKET_SERVER_URL } from '@/env';
 
-const socket = Server('http://localhost:5555/', { transports: ['websocket'] });
+const socket = Server(KH_SOCKET_SERVER_URL as string, { transports: ['websocket'] });
 
 const KHSocketClient = {
   createNewGame: ({ code }) => {

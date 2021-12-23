@@ -1,5 +1,6 @@
 import produce from 'immer';
 import React, { createContext, useReducer } from 'react';
+import { KH_USERNAME } from '@/env';
 
 interface IUserState {
   isAdmin: boolean;
@@ -7,8 +8,8 @@ interface IUserState {
 }
 
 const userInitialState: IUserState = {
-  isAdmin: Boolean(import.meta.env.VITE_USERNAME),
-  user: import.meta.env.VITE_USERNAME as string
+  isAdmin: Boolean(KH_USERNAME),
+  user: KH_USERNAME as string
 };
 
 enum ActionKind {

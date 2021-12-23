@@ -24,7 +24,8 @@
       "@/pages/*": ["./pages/*"],
       "@/context/*": ["./context/*"],
       "@/assets/*": ["./assets/*"],
-      "@/theme": ["./theme.module.scss"]
+      "@/theme": ["./theme.module.scss"],
+      "@/env": ["./environment.ts"]
     }
   },
   "include": ["./src"]
