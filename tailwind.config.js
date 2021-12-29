@@ -15,7 +15,24 @@ module.exports = {
       warning: 'var(--color-warning)',
       error: 'var(--color-error)'
     },
-    extend: {}
+    extend: {
+      fontFamily: {
+        body: ['"Montserrat"']
+      },
+      animation: {
+        loading: ' 1s ease-out 0s infinite normal none running loadingRotation'
+      },
+      keyframes: {
+        loadingRotation: {
+          '0%': {
+            transform: 'rotate(0deg)'
+          },
+          '75%, 100%': {
+            transform: 'rotate(360deg)'
+          }
+        }
+      }
+    }
   },
   plugins: []
 };
