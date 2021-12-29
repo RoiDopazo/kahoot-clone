@@ -25,6 +25,7 @@
       "@/context/*": ["./context/*"],
       "@/services/*": ["./services/*"],
       "@/assets/*": ["./assets/*"],
+      "@/themes/*": ["./themes/*"],
       "@/theme": ["./theme.module.scss"],
       "@/environment": ["./environment.ts"]
     }

@@ -1,9 +1,15 @@
 import React from 'react';
-import styles from './KHBox.module.scss';
 import cx from 'classnames';
+import { tw } from '@/themes/utils';
 
 const KHBox = ({ className, children }) => {
-  return <div className={cx(styles.boxContainer, className)}>{children}</div>;
+  return (
+    <div
+      className={cx(tw('bg-white', 'p-4', 'rounded', 'shadow-sm'), className)}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default KHBox;

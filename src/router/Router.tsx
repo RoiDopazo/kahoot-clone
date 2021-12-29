@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom';
 import LandingPage from '@/pages/game/join/landing/LandingPage';
 import Routes from './Routes';
@@ -7,8 +7,14 @@ import PrivateRoute from './PrivateRoute';
 import InstructionsPage from '@/pages/game/join/instructions/InstructionsPage';
 import LobbyPage from '@/pages/game/host/lobby/LobbyPage';
 import { AppGlobalProvider } from '@/context/AppGlobalProvider';
+import { applyTheme } from '@/themes/utils';
+import baseTheme from '@/themes/base';
 
 const Router = () => {
+  useEffect(() => {
+    applyTheme(baseTheme);
+  }, []);
+
   return (
     <BrowserRouter>
       <AppGlobalProvider>
