@@ -1,3 +1,5 @@
+const { url } = require('inspector');
+
 module.exports = {
   mode: 'jit',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -10,10 +12,11 @@ module.exports = {
       darkGray: 'var(--color-darkGray)',
       mediumGray: 'var(--color-mediumGray)',
       lightGray: 'var(--color-lightGray)',
-      default: 'var(--color-buttonDefault)',
+      default: 'var(--color-default)',
       success: 'var(--color-success)',
       warning: 'var(--color-warning)',
-      error: 'var(--color-error)'
+      error: 'var(--color-error)',
+      transparent: 'transparent'
     },
     extend: {
       fontFamily: {
@@ -31,6 +34,9 @@ module.exports = {
             transform: 'rotate(360deg)'
           }
         }
+      },
+      backgroundImage: {
+        landing_bg: "url('./src/assets/bg/christmas.jpg')"
       }
     }
   },

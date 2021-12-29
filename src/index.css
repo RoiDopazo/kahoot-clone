@@ -3,3 +3,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.lobbyClipPath1 {
+  clip-path: polygon(
+    calc(100% - 2.5vmin) 0px,
+    100% 50%,
+    calc(100% - 2.5vmin) 100%,
+    0px 100%,
+    0px 0px
+  );
+}
+
+.lobbyClipPath2 {
+  clip-path: polygon(0px 0%, 100% 0px, 100% 100%, 0px 100%, 2.5vmin 50%);
+}
+
+.hideScrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.hideScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.textShadow {
+  text-shadow: 1.5px 1.5px 3px theme('colors.darkGray');
+}

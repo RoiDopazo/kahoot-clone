@@ -5,13 +5,21 @@ import { tw, VARIANTS_MAP } from '@/themes/utils';
 type variantType = 'default' | 'black' | 'success' | 'light';
 
 interface IKHButton {
+  className?: string;
   variant?: variantType;
   onClick?: (event?: any) => void;
   small?: boolean;
   children: React.ReactNode;
 }
 
-const KHButton = ({ variant = 'default', small, children, onClick, ...rest }: IKHButton) => {
+const KHButton = ({
+  className,
+  variant = 'default',
+  small,
+  children,
+  onClick,
+  ...rest
+}: IKHButton) => {
   return (
     <button
       className={cx(
@@ -23,7 +31,8 @@ const KHButton = ({ variant = 'default', small, children, onClick, ...rest }: IK
           'hover:mt-0.5 hover:pb-0.5 hover:min-h-[46px] hover:brightness-90',
           VARIANTS_MAP[variant]
         ),
-        { [tw('min-h-[32px]')]: small }
+        { [tw('min-h-[32px]')]: small },
+        className
       )}
       onClick={onClick}
       {...rest}
