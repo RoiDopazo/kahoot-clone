@@ -14,7 +14,21 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "noImplicitAny": false,
+    "baseUrl": "./src",
+    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "paths": {
+      "@/components/*": ["./components/*"],
+      "@/router/*": ["./router/*"],
+      "@/pages/*": ["./pages/*"],
+      "@/context/*": ["./context/*"],
+      "@/services/*": ["./services/*"],
+      "@/assets/*": ["./assets/*"],
+      "@/themes/*": ["./themes/*"],
+      "@/theme": ["./theme.module.scss"],
+      "@/environment": ["./environment.ts"]
+    }
   },
   "include": ["./src"]
 }
