@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { ReactComponent as KHLogo } from '@/assets/logos/kahoot-logo.svg';
 import cx from 'classnames';
-import theme from '@/theme.module.scss';
-import styles from './LibraryPage.module.scss';
 import KHListItem from '@/components/list-item/KHListItem';
 import { useNavigate } from 'react-router-dom';
 import { GameHostContext } from '@/context/game/GameHostContext';
 import Routes from '@/router/Routes';
+import { tw } from '@/themes/utils';
+import formatMessage from 'format-message';
 
 const LibraryPage = () => {
   const navigate = useNavigate();
@@ -53,9 +53,34 @@ const LibraryPage = () => {
 
   return (
     <>
-      <nav className={styles.navBar}>
-        <KHLogo className={styles.logo} fill={theme.primaryColor} />
-        <div className={cx(styles.navItem, styles.navItemSelected)}>Biblioteca</div>
+      <nav
+        className={tw(
+          'max-h-16 h-14 bg-white',
+          'relative flex flex-row items-center',
+          'py-0 px-4',
+          'shadow-sm z-10',
+          'text-white'
+        )}
+      >
+        <KHLogo className="w-24 h-auto mr-10 fill-primary" />
+        <div
+          className={cx(
+            tw(
+              'h-14',
+              'flex items-center',
+              'px0 py-2 m-0 mr-2',
+              'no-underline font-bold cursor-pointer text-darkGray',
+              'hover:text-primary'
+            ),
+            {
+              [tw(
+                'transition border-[0px_3px_3px] border-r-transparent border-l-transparent text-primary'
+              )]: true
+            }
+          )}
+        >
+          {formatMessage('Biblioteca')}
+        </div>
       </nav>
       <div>
         {items.map((kahoot) => {

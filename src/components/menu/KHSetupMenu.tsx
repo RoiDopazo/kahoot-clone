@@ -2,7 +2,6 @@ import { Menu } from '@mui/material';
 import React, { useState, useContext, useEffect } from 'react';
 import { ReactComponent as GearIcon } from '@/assets/svg/gear-outlined-icon.svg';
 import KHButton from '@/components/button/KHButton';
-import styles from './KHSetupMenu.module.scss';
 import KHTextInput from '../input/KHTextInput';
 import cx from 'classnames';
 import { AppContext } from '@/context/app/AppContext';
@@ -10,7 +9,7 @@ import KHSocketClient from '@/services/socket-client/KHSocketClient';
 
 const KHSetupMenu = ({ className }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [status, setStatus] = useState<boolean | undefined>(undefined);
+  const [isOK, setIsOK] = useState<boolean | undefined>(undefined);
   const [checking, setChecking] = useState<boolean>(true);
   const { state: appState, mutations: appMutations } = useContext(AppContext);
 
@@ -18,7 +17,7 @@ const KHSetupMenu = ({ className }) => {
 
   useEffect(() => {
     const checkConn = async () => {
-      setStatus(await KHSocketClient.checkConnection());
+      setIsOK(await KHSocketClient.checkConnection());
       setChecking(false);
     };
 
@@ -35,7 +34,7 @@ const KHSetupMenu = ({ className }) => {
   const handleOnBlur = async () => {
     setChecking(true);
     KHSocketClient.changeServerUrl({ socketUrl: appState.socketUrl });
-    setStatus(await KHSocketClient.checkConnection());
+    setIsOK(await KHSocketClient.checkConnection());
     setChecking(false);
   };
 
@@ -48,11 +47,11 @@ const KHSetupMenu = ({ className }) => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <GearIcon className={styles.gearIcon} />
+        <GearIcon className={'h-6 w-auto'} />
       </KHButton>
       <Menu id="fade-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <div className={styles.menuContainer}>
-          <div className={styles.menuRowContainer}>
+        <div className="bg-white p-5">
+          <div className="flex justify-between items-center">
             <KHTextInput
               value={appState.socketUrl}
               onBlur={handleOnBlur}
@@ -60,10 +59,10 @@ const KHSetupMenu = ({ className }) => {
               placeholder="Socket URL"
             />
             <div
-              className={cx(styles.reportStatus, {
-                [styles.reportStatusOK]: status === true,
-                [styles.reportStatusDOWN]: status === false,
-                [styles.reportBlinking]: checking
+              className={cx('w-6 h-5 rounded-lg bg-warning ml-5', {
+                'bg-success': isOK === true,
+                'bg-error': isOK === false,
+                'animate-ping': checking
               })}
             />
           </div>
